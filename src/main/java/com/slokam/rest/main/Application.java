@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @SpringBootApplication
 @EntityScan("com.slokam.rest.pojo")
 @EnableJpaRepositories("com.slokam.rest.dao")
-@ComponentScan({"com.slokam.rest.controller","com.slokam.rest.service"})
+@ComponentScan({"com.slokam.rest.controller","com.slokam.rest.service","com.slokam.rest.util"})
 public class Application {
 
 	public static void main(String[] args) {

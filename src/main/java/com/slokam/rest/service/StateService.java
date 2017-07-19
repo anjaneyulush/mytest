@@ -12,27 +12,19 @@ import java.util.zip.ZipOutputStream;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.mysema.query.types.expr.BooleanExpression;
 import com.slokam.rest.dao.StateDAO;
 import com.slokam.rest.pojo.QState_M;
 import com.slokam.rest.pojo.State_M;
+import com.slokam.rest.util.IStateFileGenerater;
 
 
 @Service
@@ -40,6 +32,10 @@ public class StateService {
 
 	 @Autowired
 	 private JavaMailSender javaMailSender;
+	 
+	 @Autowired
+	 @Qualifier(value="stateFileGenerater")
+	 private IStateFileGenerater fileGen ;
 	 
 	 @Autowired
 	 private StateDAO stateDao;
@@ -51,13 +47,21 @@ public class StateService {
 			 Iterable<State_M> list = stateDao.findAll(stateName.or(stateId));
 		 return list;
 	 }
-	 
 	 public void saveState(State_M state) {
+		 stateDao.save(state);
+	 
+		 long timeStamp = System.currentTimeMillis();
+		 String fileName = "E:\\stateFile"+timeStamp;
+		 
+		 fileGen.generateFile(state, fileName);
+		 
+	 }
+	 public void saveState123(State_M state) {
 	/*	 Specification<State_M> states =  where(
 	                (root, query, cb) ->
                     cb.lessThan(root.get(Employee_.dateOfBirth), olderThanDate)
     );*/
-		 long  timeStamp = System.currentTimeMillis();
+		 /*long  timeStamp = System.currentTimeMillis();
 		 stateDao.save(state);
 		 
 		 //Word 
@@ -118,11 +122,11 @@ public class StateService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		 
 		 
 		  
-		 sendMail(filename,pdfFileName,wordFileName);
+		// sendMail(filename,pdfFileName,wordFileName);
 		 
 		/* SimpleMailMessage mailMessage = new SimpleMailMessage();
 		 mailMessage.setTo("upendra.j2ee@gmail.com");

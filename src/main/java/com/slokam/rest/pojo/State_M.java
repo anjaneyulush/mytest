@@ -25,7 +25,7 @@ public class State_M {
   private List<City_M> cities;
   @ManyToOne
   @JoinColumn(name="cnid")
-  @JsonIgnore
+  
   private Country_M country;
   
 public Integer getId() {
