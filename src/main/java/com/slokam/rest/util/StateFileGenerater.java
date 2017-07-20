@@ -29,7 +29,7 @@ public  class StateFileGenerater implements IStateFileGenerater{
 				IStateFileGenerater file = (IStateFileGenerater)cls.newInstance();
 				gens.add(file);
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
+				
 			}
 		}
 	   

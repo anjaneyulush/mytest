@@ -29,6 +29,12 @@ public class ExcellFileGenerater implements IStateFileGenerater{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally{
+			try {
+				workbook.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

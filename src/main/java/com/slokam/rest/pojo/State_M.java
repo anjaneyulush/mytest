@@ -9,13 +9,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="state")
 public class State_M {
-  
+  /*
+   * <state id=1>
+   *    
+   *    <name> asdf</name>
+   *    </state>
+   */
+	
   @Id
   @GeneratedValue
   private Integer id;
@@ -25,7 +35,7 @@ public class State_M {
   private List<City_M> cities;
   @ManyToOne
   @JoinColumn(name="cnid")
-  
+  @JsonIgnoreProperties("states")
   private Country_M country;
   
 public Integer getId() {

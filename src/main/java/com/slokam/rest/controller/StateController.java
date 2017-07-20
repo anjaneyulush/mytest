@@ -25,8 +25,8 @@ public class StateController {
 	public ResponseEntity<String> saveState(@RequestBody State_M state) {
 	
 		stateService.saveState(state);
-		ResponseEntity<String> re = new ResponseEntity<String>("Successfully saved.",HttpStatus.CREATED); 
-	    return re;
+		return new ResponseEntity<String>("Successfully saved.",HttpStatus.CREATED); 
+	     
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/byName/{name}")
@@ -46,7 +46,7 @@ public class StateController {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity< List<State_M>> getStates() { 
 		 List<State_M>  states = stateService.getStates();
-		ResponseEntity< List<State_M>> re = new ResponseEntity< List<State_M>>(states,HttpStatus.OK); 
+		ResponseEntity< List<State_M>> re = new ResponseEntity<>(states,HttpStatus.OK); 
 	    return re;
 	}
 	
