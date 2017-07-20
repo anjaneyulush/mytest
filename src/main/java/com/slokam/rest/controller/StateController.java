@@ -2,6 +2,7 @@ package com.slokam.rest.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import com.slokam.rest.service.StateService;
 @RestController
 @RequestMapping("state")
 public class StateController {
-
+    private static final  Logger LOGGER = Logger.getLogger(StateController.class);  
 	@Autowired
 	private StateService stateService;
 	@RequestMapping(method=RequestMethod.POST)
@@ -45,7 +46,8 @@ public class StateController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity< List<State_M>> getStates() { 
-		 List<State_M>  states = stateService.getStates();
+		LOGGER.info("LOGGING TEST MESSAGE ...");
+		List<State_M>  states = stateService.getStates();
 		ResponseEntity< List<State_M>> re = new ResponseEntity<>(states,HttpStatus.OK); 
 	    return re;
 	}
