@@ -22,10 +22,9 @@ import org.springframework.stereotype.Service;
 
 import com.mysema.query.types.expr.BooleanExpression;
 import com.slokam.rest.dao.StateDAO;
-import com.slokam.rest.pojo.QState_M;
+//import com.slokam.rest.pojo.QState_M;
 import com.slokam.rest.pojo.State_M;
 import com.slokam.rest.util.IStateFileGenerater;
-
 
 @Service
 public class StateService {
@@ -40,13 +39,13 @@ public class StateService {
 	 @Autowired
 	 private StateDAO stateDao;
 	 
-	 public Iterable<State_M> searchStatesByName(String name,Integer id){
+/*	 public Iterable<State_M> searchStatesByName(String name,Integer id){
 			 QState_M state2 = QState_M.state_M;
 			 BooleanExpression stateName = state2.name.eq(name);
 			 BooleanExpression stateId = state2.id.eq(id);
 			 Iterable<State_M> list = stateDao.findAll(stateName.or(stateId));
 		 return list;
-	 }
+	 }*/
 	 public void saveState(State_M state) {
 		 stateDao.save(state);
 	 
@@ -148,7 +147,7 @@ public class StateService {
 		 return states;
 	 }
 	 //getStatesById
-	 
+
 	 public List<Object[]> getStatesById(Integer  id){
 		 return stateDao.getStatesById(id);
 		 
@@ -250,6 +249,8 @@ public void sendMail(String filename, String pdfFileName, String wordFileName) {
 	}
 	
 }*/
+
+
 
 
 

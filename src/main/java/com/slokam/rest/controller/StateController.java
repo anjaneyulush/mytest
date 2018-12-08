@@ -2,6 +2,8 @@ package com.slokam.rest.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,12 +39,12 @@ public class StateController {
 	    return re;
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="/byNameQ/{name}/{id}")
+/*	@RequestMapping(method=RequestMethod.GET,value="/byNameQ/{name}/{id}")
 	public ResponseEntity<Iterable<State_M>> getStatesByName2(@PathVariable String name,@PathVariable Integer id ) { 
 		Iterable<State_M>  states = stateService.searchStatesByName(name,id);
 		ResponseEntity<Iterable<State_M>> re = new ResponseEntity<Iterable<State_M>>(states,HttpStatus.OK); 
 	    return re;
-	}
+	}*/
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity< List<State_M>> getStates() { 
@@ -58,6 +60,7 @@ public class StateController {
 		ResponseEntity<List<Object[]>> re = new ResponseEntity<List<Object[]>>(states,HttpStatus.OK); 
 	    return re;
 	}
+		
 	
 	@RequestMapping(method=RequestMethod.GET,value="/getCountry/{stateName}")
 	public ResponseEntity<String> getCountryNameByStateName(@PathVariable String stateName){
